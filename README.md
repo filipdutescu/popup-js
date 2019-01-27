@@ -3,7 +3,7 @@ Free to use, open source jQuery plugin which provides a customizable Pop-up/Dial
 
 # Build With
 <ul>
-  <li><a href="https://jquery.com/">jQuery</a> - main framework used
+  <li><a href="https://jquery.com/" target="_blank">jQuery</a> - main framework used
 </ul>
 
 # License
