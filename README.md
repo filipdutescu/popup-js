@@ -8,10 +8,7 @@ This component is a <a href="https://jquery.com/" target="_blank">jQuery</a> plu
 
 In the head of your HTML page include it as <span style="font-variant:italic;font-weight:bold">before</span> this component's <code>.js</code>, as follows: <br />
 <code>
-&#60;head&#62;<br />
-&#60;script src="jquery-3.3.1.min.js"&#62;&#60;/script&#62;<br />
-&#60;script src="popup-js.js"&#62;&#60;/script&#62;<br />
-&#60;/head&#62;
+&#60;script src="jquery-3.3.1.min.js"&#62;&#60;/script&#62;<br />...<br />&#60;script src="popup-js.js"&#62;&#60;/script&#62;
 </code>
 
 ## Build With
