@@ -1,18 +1,44 @@
-.creation-dialog {
-    opacity: 0;
+.popup {
     z-index: 999;
     position: fixed;
-    top: -50%;
     left: 40%;
     width: 20%;
-    padding: 0px 10px 10px;
+    padding: 10px;
     background-color: #fff;
     -webkit-box-shadow: 0px 7px 15px 0px rgba(50, 50, 50, 0.7);
     -moz-box-shadow: 0px 7px 15px 0px rgba(50, 50, 50, 0.7);
     box-shadow: 0px 7px 15px 0px rgba(50, 50, 50, 0.7);
     border: 1px solid #d8d8d8;
-    border-radius: 2px;
+    border-radius: 5px;
     transition: 500ms;
 }
 
-.dialog-title { text-align: center; }
+.popup-hidden {
+    opacity: 0;
+    top: -50%;
+    transition: 500ms;
+}
+
+.popup-header {
+    margin-bottom: 5px;
+}
+
+.popup-title { 
+    text-align: center;
+    font-size: 20px; 
+}
+
+.popup-header .popup-ctrl {
+    text-align: right;
+    border-radius: 30%;
+    width: 20px;
+}
+
+.popup-body {
+    font-size: 16px;
+}
+
+.popup-ctrl {
+    border: none;  
+    border-radius: 5px;  
+}

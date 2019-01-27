@@ -10,47 +10,50 @@ function togglePopup(id) {
             content: "Popup Content",
 
             hidden: true,
-
+            
+            theme: "modern",
+            
             controls: {
                 close: true
-            },
-            actions: {
-                close: function() {
-                    this.css("opacity", "0");
-                    this.css("top", "-50%");
-                }
             }
-        }, options);
-
+        }, $.fn.popup.defaults, options);
+        
         this.addClass("popup");
         if(settings.hidden === true)
             this.addClass("popup-hidden");
-
+        
         var header = `
-            <div class='popup-header' ${settings.controls.close === true ? "style='position: relative;'" : ""}>
-                <p>${settings.title}<p>
-                ${settings.controls.close === true ? "<button class='popup-ctrl' style='position: absolute; right: 10px; top: 10px;'>&#215;</button>" : ""}
-            </div>
+        ${settings.theme === "modern" ? settings.controls.close === true ? "<div style='position:relative;'><button class='popup-ctrl' style='position: absolute; right: 10px; top: 5px;'>&#215;</button></div>" : "" : ""}
+        <div class='popup-header'>
+        <p class='popup-title'>${settings.title}<p>
+        </div>
         `;
-
+        
         var body = `
-            <div class='popup-body'>
-                <p>${settings.content}</p>
-            </div>
+        <div class='popup-body'>
+            ${settings.content}
+        </div>
         `;
-
+        
         var controls = `
-            <div class='popup-controls'>
-            </div>
+        <div class='popup-controls'>
+        ${settings.theme === "classic" ? settings.controls.close === true ? "<button class='popup-ctrl' style='position: absolute; right: 10px; top: 10px;'>&#215;</button>" : "" : ""}
+        </div>
         `;
-
+        
         this.html(header + body + controls);
-
-        if(settings.controls.close === true)
-            this.find(".popup-ctrl").on('click', settings.actions.close);
-
-        //this.add("<p>test</p>")
-
+        
+        if (settings.controls.close === true) {
+            var popup = this;
+            this.find(".popup-ctrl").on('click', () => {
+                popup.css("opacity", "0");
+                popup.css("top", "-50%");                
+            });
+        }
+        
         return this;
     }
 }(jQuery));
+
+$.fn.popup.defaults = {
+};
