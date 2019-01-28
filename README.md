@@ -1,5 +1,5 @@
 # popup-js
-Free to use, open source jQuery plugin which provides a customizable Pop-up/Dialog component. Has a stylesheet for the component, but custom styling is also possible.
+Free to use, open source jQuery plugin which provides customizable Pop-up/Dialog components in just 3 lines of code. Has a stylesheet for the component, but custom styling is also possible.
 
 ## Getting Started
 The following intructions will provided the knowledge needed to import and implement `popup-js` into your project. They will only cover basic topics, for users who want to get the plugin up and working as soon as possible. 
