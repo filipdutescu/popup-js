@@ -40,7 +40,7 @@ The next step is to add in the page's script (or in `<script>`) a query to get t
   $("#popup").popup();
 </script>
 ````
-This creates a popup that uses the _default_ settings (see [docs]()). In order to display it, a trigger is required. For example, a button which calls `.togglePopup(id)`, as such:
+This creates a popup that uses the _default_ settings (see [docs](https://github.com/filipdutescu/popup-js/wiki/Docs)). In order to display it, a trigger is required. For example, a button which calls `.togglePopup(id)`, as such:
 ````html
 <button onclick="togglePopup("#popup")">Open Popup</button>
 ````
@@ -63,7 +63,7 @@ Those two parameters can also receive raw html:
 </script>
 ````
 
-There is a lot more you can do with `popup-js`. To see all of the options and more tutorials, see the [documentation]().
+There is a lot more you can do with `popup-js`. To see all of the options and more tutorials, see the [documentation](https://github.com/filipdutescu/popup-js/wiki/Docs).
 
 ## Built With
 * <a href="https://jquery.com/" target="_blank">jQuery</a> - main framework used</li>
