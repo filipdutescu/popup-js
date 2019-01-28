@@ -23,9 +23,10 @@ function togglePopup(id) {
             this.addClass("popup-hidden");
         
         var header = `
-        ${settings.theme === "modern" ? settings.controls.close === true ? "<div style='position:relative;'><button class='popup-ctrl' style='position: absolute; right: 10px; top: 5px;'>&#215;</button></div>" : "" : ""}
+        ${settings.theme === "modern" ? settings.controls.close === true ? "<div style='position:relative;'><button class='popup-ctrl' style='position: absolute; right: -5px; top: -5px;'>&#215;</button></div>" : "" : ""}
         <div class='popup-header'>
-        <p class='popup-title'>${settings.title}<p>
+        ${settings.title}
+        <hr />
         </div>
         `;
         
