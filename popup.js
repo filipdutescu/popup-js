@@ -10,6 +10,7 @@ function togglePopup(id) {
             content: "Popup Content",
 
             hidden: true,
+            header: true,
             
             theme: "modern",
             
@@ -41,8 +42,8 @@ function togglePopup(id) {
         ${settings.theme === "classic" ? settings.controls.close === true ? "<button class='popup-ctrl' style='position: absolute; right: 10px; top: 10px;'>&#215;</button>" : "" : ""}
         </div>
         `;
-        
-        this.html(header + body + controls);
+
+        this.html(settings.header ? header : "" + body + controls);
         
         if (settings.controls.close === true) {
             var popup = this;
