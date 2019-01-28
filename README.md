@@ -22,7 +22,7 @@ You could either clone/download this repository or use the links of the raw file
 <script src="popup-js.js"></script>
 ```
 ---
-You could (and I would recommend) also include the stylesheet of the Popup component, like so:
+You could (and should) also include the stylesheet of the Popup component, like so:
 ```
 <link rel="stylesheet" type="text/css" href="popup-js.css" />
 ```
