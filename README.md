@@ -1,5 +1,5 @@
 # popup-js
-Free to use, open source jQuery plugin which provides customizable Pop-up/Dialog components in just 3 lines of code. Has a stylesheet for the component, but custom styling is also possible.
+Free to use, open source jQuery plugin which provides customizable Pop-up/Dialog components in just 2 lines of code. Has a stylesheet for the component, but custom styling is also possible.
 
 ## Getting Started
 The following intructions will provided the knowledge needed to import and implement `popup-js` into your project. They will only cover basic topics, for users who want to get the plugin up and working as soon as possible. 
@@ -28,26 +28,22 @@ You could (and should) also include the stylesheet of the Popup component, like 
 ````
 
 ### Using popup-js
-Using `popup-js` is as easy as adding an HTML element and calling the function on it.
+Using `popup-js` is as easy as calling the `.popup(...)` function and storing its result in a variable. Then, whenever you want to display the popup, you can call `.openPopup()` on that object.
 
-For example, in the current page, add a `<div>` with an id (or another way to identify it solely).  
-````html
-<div id="#popup"></div>
-````
-The next step is to add in the page's script (or in `<script>`) a query to get the element and then call `.popup()`:
+For example, add in the page's script (or in `<script>`) an empty query and then call `.popup(...)`:
 ````html
 <script>
-  $("#popup").popup();
+  let myPopup = $().popup(...);
 </script>
 ````
-This creates a popup that uses the _default_ settings (see [docs](https://github.com/filipdutescu/popup-js/wiki/Docs)). In order to display it, a trigger is required. For example, a button which calls `.togglePopup(id)`, as such:
+This creates a popup that uses the _default_ settings (see [docs](https://github.com/filipdutescu/popup-js/wiki/Docs)). In order to display it, a trigger is required. For example, a button which calls `.openPopup()`, as such:
 ````html
-<button onclick="togglePopup("#popup")">Open Popup</button>
+<button onclick="myPopup.openPopup()">Open Popup</button>
 ````
 That's it. You now have a working popup. Of course, it contains junk data, which is not very useful, is it? Here is a quick way to add content to the popup, by adding parameters to the `.popup()` call:
 ````html
 <script>
-  $("#popup").popup({
+  let myPopup = $().popup({
       title: "My title",
       content: "My content"
   });
@@ -56,7 +52,7 @@ That's it. You now have a working popup. Of course, it contains junk data, which
 Those two parameters can also receive raw html:
 ````html
 <script>
-  $("#popup").popup({
+  let myPopup = $().popup({
       title: "<h3>My title</h3>",
       content: "<div class='my-class'>My <span style='font-style: italic;'>content</span></div>"
   });
