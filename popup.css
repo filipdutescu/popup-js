@@ -1,4 +1,28 @@
-.popup {
+/* 
+    MIT License
+    
+    Copyright (c) 2019 filipdutescu
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+*/
+
+.pu_popup {
     position: fixed;
     z-index: 999;
     top: 10px;
@@ -15,41 +39,41 @@
     transition: 500ms;
 }
 
-.popup-hidden {
+.pu_popup-hidden {
     opacity: 0;
     top: -50%;
     transition: 500ms;
 }
 
-.popup-header {
+.pu_popup-header {
     text-align: center;
     font-size: 20px;
     margin-bottom: 5px;
 }
 
-.popup-header .popup-ctrl {
+.pu_popup-header .pu_popup-ctrl {
     text-align: right;
     border-radius: 35%;
     width: 10px;
 }
 
-.popup-header hr { 
+.pu_popup-header hr { 
     opacity: 0.5;
     border: 1px groove #d8d8d8;
 }
 
-.popup-body {
+.pu_popup-body {
     font-size: 16px;
     text-indent: .75rem;
 }
 
-.popup-ctrl {
+.pu_popup-ctrl {
     border: none;  
     border-radius: 5px;
     background-color: inherit;  
     transition: 200ms;
 }
 
-.popup-ctrl:hover {
+.pu_popup-ctrl:hover {
     background-color: #ebebeb;
 }
