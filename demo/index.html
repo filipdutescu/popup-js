@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dialog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../popup-js/popup.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../popup-js/popup.js"></script>
+</head>
+<body style="background-color: rgb(141, 22, 22);">
+    
+    <button onclick="popup1.openPopup()">Open popup</button>
+    <button onclick="popup2.openPopup()">Open second popup</button>
+
+    <script>
+        var string = 'testing';
+        for(var i = 0; i < 20; i++)
+            string += ' bla';
+
+        let popup1 = $().popup({
+            title: "Testing options",
+            content: string
+        });
+        let popup2 = $().popup({
+            title: "Testing fadein",
+            content: string,
+        });
+    </script>
+</body>
+</html>
