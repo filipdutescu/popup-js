@@ -22,11 +22,6 @@
     SOFTWARE.
 */
 
-/*
-    TODO:
-        check if actions contains object
-*/
-
 (function ($) {
     $.fn.popup = function (options) {
         let settings = $.extend({}, $.fn.popup.defaults, options);
@@ -83,20 +78,44 @@
                     lastTransition = "opacity";
                 }
                 if (settings.transitionOnClose.top === true) {
-                    popup.css("top", settings.transitionOnCloseAmmount);
-                    lastTransition = "top";
+                    if(settings.transitionOnOpen.bottom !== true) {
+                        popup.css("top", settings.transitionOnCloseAmmount);
+                        lastTransition = "top";
+                    }
+                    else {
+                        popup.css("bottom", settings.transitionOnCloseAmmount.substring(0, 1) === '-' ? settings.transitionOnCloseAmmount.substring(1, settings.transitionOnCloseAmmount.length) : settings.transitionOnCloseAmmount);
+                        lastTransition = "bottom";
+                    }
                 }
                 if (settings.transitionOnClose.right === true) {
-                    popup.css("right", settings.transitionOnCloseAmmount);
-                    lastTransition = "right";
+                    if(settings.transitionOnOpen.left !== true) {
+                        popup.css("right", settings.transitionOnCloseAmmount);
+                        lastTransition = "right";
+                    }
+                    else {                        
+                        popup.css("left", settings.transitionOnCloseAmmount.substring(0, 1) === '-' ? settings.transitionOnCloseAmmount.substring(1, settings.transitionOnCloseAmmount.length) : settings.transitionOnCloseAmmount);
+                        lastTransition = "left";
+                    }
                 }
                 if (settings.transitionOnClose.bottom === true) {
-                    popup.css("bottom", settings.transitionOnCloseAmmount);
-                    lastTransition = "bottom";
+                    if(settings.transitionOnOpen.top !== true) {
+                        popup.css("bottom", settings.transitionOnCloseAmmount);
+                        lastTransition = "bottom";
+                    }
+                    else {
+                        popup.css("top", settings.transitionOnCloseAmmount.substring(0, 1) === '-' ? settings.transitionOnCloseAmmount.substring(1, settings.transitionOnCloseAmmount.length) : settings.transitionOnCloseAmmount);
+                        lastTransition = "top";
+                    }
                 }
                 if (settings.transitionOnClose.left === true) {
-                    popup.css("left", settings.transitionOnCloseAmmount);
-                    lastTransition = "left";
+                    if(settings.transitionOnOpen.right !== true) {
+                        popup.css("left", settings.transitionOnCloseAmmount);
+                        lastTransition = "left";
+                    }
+                    else {  
+                        popup.css("right", settings.transitionOnCloseAmmount.substring(0, 1) === '-' ? settings.transitionOnCloseAmmount.substring(1, settings.transitionOnCloseAmmount.length) : settings.transitionOnCloseAmmount);
+                        lastTransition = "right";
+                    }
                 }
 
                 popup.on('transitionend', function (event) {
