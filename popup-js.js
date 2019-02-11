@@ -22,49 +22,137 @@
     SOFTWARE.
 */
 
-(function($) {
-    $.fn.popup = function(options) {
-        var settings = $.extend({}, $.fn.popup.defaults, options);
-        
+/*
+    TODO:
+        check if actions contains object
+*/
+
+(function ($) {
+    $.fn.popup = function (options) {
+        let settings = $.extend({}, $.fn.popup.defaults, options);
+
         let popup = $(document.createElement("div"));
 
-        popup.addClass(settings.style.classes.main);
-        if(settings.hidden === true)
-            popup.addClass(settings.style.classes.hidden);
-        
-        var header = `
-        ${settings.layout === "modern" ? settings.controls.close === true ? `<div style='position:relative;'><button class='${settings.style.classes.control}' style='position: absolute; right: -5px; top: -5px;'>&#215;</button></div>` : "" : ""}
-        <div class='${settings.style.classes.header}'>
-        ${settings.title}
-        <hr />
+        popup.addClass(settings.style.main);
+        if(settings.fixed === true)
+            popup.addClass(settings.style.fixed);
+        if(settings.animated === true)
+            popup.addClass(settings.style.animated);
+        if (settings.hidden === true)
+            popup.addClass(settings.style.hidden);
+        if (settings.transitionOnOpen.top === true)
+            popup.addClass(settings.style.transitionTop);
+        if (settings.transitionOnOpen.right === true)
+            popup.addClass(settings.style.transitionRight);
+        if (settings.transitionOnOpen.bottom === true)
+            popup.addClass(settings.style.transitionBottom);
+        if (settings.transitionOnOpen.left === true)
+            popup.addClass(settings.style.transitionLeft);
+
+        let header = `
+        ${settings.layout === "modern" ? settings.controls.close === true ? `<div class='${settings.style.modern}'><button class='${settings.style.control}' data-control='close'>&#215;</button></div>` : "" : ""}
+        <div class='${settings.style.header}'>
+            ${settings.title}
+            <hr />
         </div>
         `;
-        
-        var body = `
-        <div class='${settings.style.classes.body}'>
+
+        let body = `
+        <div class='${settings.style.body}'>
             ${settings.content}
         </div>
         `;
-        
-        var controls = `
-        <div class='${settings.style.classes.controls}'>
-        ${settings.layout === "classic" ? settings.controls.close === true ? `<button class='${settings.style.classes.control}' style='position: absolute; right: 10px; top: 10px;'>&#215;</button>` : "" : ""}
+
+        let controls = `
+        <div class='${settings.style.controls} ${settings.layout === "classic" ? settings.style.classic : ""}'>
+            ${settings.controls.confirm === true ? `<button class='${settings.style.control}' data-control='confirm'>Confirm</button>` : ""}
+            ${settings.controls.submit === true ? `<button class='${settings.style.control}' data-control='submit'>Submit</button>` : ""}
+            ${settings.controls.cancel === true ? `<button class='${settings.style.control}' data-control='cancel'>cancel</button>` : ""}
+            ${settings.layout === "classic" ? settings.controls.close === true ? `<button class='${settings.style.control}' data-control='close'>Close</button>` : "" : ""}
         </div>
         `;
 
         popup.html((settings.header ? header : "") + body + controls);
         $("body").append(popup);
-        
+
         if (settings.controls.close === true) {
-            popup.find(`.${settings.style.classes.control}`).on('click', () => {
-                popup.css("opacity", "0");
-                popup.css("top", "-50%");                
+            popup.find(`.${settings.style.control}[data-control='close']`).on('click', () => {
+                let lastTransition = "";
+                if (settings.transitionOnClose.fade === true) {
+                    popup.css("opacity", "0");
+                    lastTransition = "opacity";
+                }
+                if (settings.transitionOnClose.top === true) {
+                    popup.css("top", settings.transitionOnCloseAmmount);
+                    lastTransition = "top";
+                }
+                if (settings.transitionOnClose.right === true) {
+                    popup.css("right", settings.transitionOnCloseAmmount);
+                    lastTransition = "right";
+                }
+                if (settings.transitionOnClose.bottom === true) {
+                    popup.css("bottom", settings.transitionOnCloseAmmount);
+                    lastTransition = "bottom";
+                }
+                if (settings.transitionOnClose.left === true) {
+                    popup.css("left", settings.transitionOnCloseAmmount);
+                    lastTransition = "left";
+                }
+
+                popup.on('transitionend', function (event) {
+                    if (event.originalEvent.propertyName === lastTransition) {
+                        popup.removeAttr("style");
+                        lastTransition = "";
+                    }
+                });
+
+                let closeCallback = settings.actions.find(a => a.name === 'close');
+                if(typeof closeCallback !== 'undefined') {
+                    closeCallback = closeCallback.callback;
+                    if(closeCallback != null)
+                        closeCallback();
+                }
             });
         }
-        
-        this.openPopup = function() {
-            popup.css("opacity", "1");
-            popup.css("top", "30%");
+
+        if(settings.controls.confirm === true) {
+            let confirmCallback = settings.actions.find(a => a.name === 'confirm');
+            if(typeof confirmCallback !== 'undefined') {
+                confirmCallback = confirmCallback.callback;
+                if(confirmCallback != null)
+                    popup.find(`.${settings.style.control}[data-control='confirm']`).on('click', confirmCallback);
+            }
+        }
+
+        if(settings.controls.cancel === true) {
+            let cancelCallback = settings.actions.find(a => a.name === 'cancel');
+            if(typeof cancelCallback !== 'undefined') {
+                cancelCallback = cancelCallback.callback;
+                if(cancelCallback != null)
+                    popup.find(`.${settings.style.control}[data-control='cancel']`).on('click', cancelCallback);
+            }
+        }
+
+        if(settings.controls.submit === true) {
+            let submitCallback = settings.actions.find(a => a.name === 'submit');
+            if(typeof submitCallback !== 'undefined') {
+                submitCallback = submitCallback.callback;
+                if(submitCallback != null)
+                    popup.find(`.${settings.style.control}[data-control='submit']`).on('click', submitCallback);
+            }
+        }
+
+        this.openPopup = function () {
+            if (settings.transitionOnOpen.fade === true || settings.hidden !== 'undefined')
+                popup.css("opacity", "1");
+            if (settings.transitionOnOpen.top === true)
+                popup.css("top", settings.transitionOnOpenAmmount);
+            if (settings.transitionOnOpen.right === true)
+                popup.css("right", settings.transitionOnOpenAmmount);
+            if (settings.transitionOnOpen.bottom === true)
+                popup.css("bottom", settings.transitionOnOpenAmmount);
+            if (settings.transitionOnOpen.left === true)
+                popup.css("left", settings.transitionOnOpenAmmount);
         }
 
         return this;
@@ -75,23 +163,63 @@ $.fn.popup.defaults = {
     title: "Popup Title",
     content: "Popup Content",
 
-    hidden: true,
     header: true,
-    
+    fixed: false,
+
     layout: "modern",
-    
+
     controls: {
-        close: true
+        close: true,
+        confirm: false,
+        cancel: false,
+        submit: false
     },
-    
+
+    actions: [
+        { name: "close", callback: null },
+        { name: "confirm", callback: null },
+        { name: "cancel", callback: null },
+        { name: "submit", callback: null }
+    ],
+
+    hidden: true,
+    animated: true,
+
+    transitionOnOpen: {
+        top: true,
+        right: false,
+        bottom: false,
+        left: false,
+        fade: true
+    },
+    transitionOnOpenAmmount: "20%",
+
+    transitionOnClose: {
+        top: true,
+        right: false,
+        bottom: false,
+        left: false,
+        fade: true
+    },
+    transitionOnCloseAmmount: "-100%",
+
     style: {
-        classes: {
-            main: "pu_popup",
-            hidden: "pu_popup-hidden",
-            header: "pu_popup-header",
-            body: "pu_popup-body",
-            controls: "pu_popup-controls",
-            control: "pu_popup-ctrl",
-        }
+        main: "pu_popup",
+        header: "pu_popup-header",
+        body: "pu_popup-body",
+        controls: "pu_popup-controls",
+        control: "pu_popup-ctrl",
+
+        fixed: "pu_popup-fixed",
+
+        animated: "pu_popup-animated",
+        hidden: "pu_popup-hidden",
+        transitionTop: "pu_popup-top",
+        transitionRight: "pu_popup-right",
+        transitionBottom: "pu_popup-bottom",
+        transitionLeft: "pu_popup-left",
+
+        modern: "pu_popup-modern",
+        classic: "pu_popup-classic"
     }
 };

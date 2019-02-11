@@ -25,8 +25,6 @@
 .pu_popup {
     position: fixed;
     z-index: 999;
-    top: 10px;
-    left: 40%;
     width: 20%;
     opacity: 1;
     padding: 10px;
@@ -36,13 +34,41 @@
     box-shadow: 0px 7px 15px 0px rgba(50, 50, 50, 0.7);
     border: 1px solid #d8d8d8;
     border-radius: 5px;
-    transition: 500ms;
 }
 
 .pu_popup-hidden {
     opacity: 0;
-    top: -50%;
-    transition: 500ms;
+}
+
+.pu_popup-animated { 
+    transition: 500ms; 
+}
+
+.pu_popup-top { 
+    top: -50%; 
+}
+
+.pu_popup-right { 
+    right: -100%; 
+    transform: translateX(50%);
+    -webkit-transform: translateX(50%);
+}
+
+.pu_popup-bottom { 
+    bottom: -50%; 
+}
+
+.pu_popup-left { 
+    left: -100%; 
+}
+
+.pu_popup-top, .pu_popup-bottom, .pu_popup-left {
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.pu_popup-top, .pu_popup-bottom {
+    left: 50%;
 }
 
 .pu_popup-header {
@@ -76,4 +102,25 @@
 
 .pu_popup-ctrl:hover {
     background-color: #ebebeb;
+}
+
+.pu_popup-controls {
+    margin-top: 10px;
+}
+
+.pu_popup-modern, .pu_popup-classic {
+    position: relative;
+}
+
+.pu_popup-fixed, .pu_popup-modern button {
+    position: absolute;
+}
+
+.pu_popup-modern button {
+    right: -5px; 
+    top: -5px;
+}
+
+.pu_popup-classic button:hover {
+    background-color: #e7e7e7;
 }
